@@ -22,7 +22,7 @@
 
 * Database: MongoDB for efficient data storge and retrieval.
 
-* other: restfull api integration
+* Others: RESTful API integration
 
 **WHY THIS PROJECT :**
 
