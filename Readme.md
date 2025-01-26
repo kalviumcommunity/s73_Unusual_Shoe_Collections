@@ -1,4 +1,4 @@
-**Project Title :-** The Most Unusual Shoe Collections
+# Project Title :- The Most Unusual Shoe Collections
 
 **Project Overview :-** This project shall provide a system that allows a user to login and view the list of unusual shoe collections presented by other users. The platform will be made to entertain as well as inspire the shoe lovers by displaying unique as well as bizarre shoe collections.
 
