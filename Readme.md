@@ -16,13 +16,13 @@
 
 **TECH STACK :**
 
-* Frontend: React.js, Vite
+* Frontend: html and css to build layout and design and javascript for interactivity
 
-* Backend: Express.js, Node.js
+* Backend: Express.js and Node.js for server side logic and the development of API.
 
-* Database: MongoDB
+* Database: MongoDB for efficient data storge and retrieval.
 
-* Authentication: Firebase Auth (optional)
+* other: restfull api integration
 
 **WHY THIS PROJECT :**
 
