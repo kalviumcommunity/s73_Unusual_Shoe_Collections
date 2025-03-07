@@ -2,14 +2,16 @@
   "name": "s73_unusual_shoe_collections",
   "version": "1.0.0",
   "description": "A fun and engaging platform for users to login, view, and upload unique and unusual shoe collections, fostering a community of shoe enthusiast's.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "nitin dhake",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1"
   }
 }
