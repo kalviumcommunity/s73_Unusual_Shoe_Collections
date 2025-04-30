@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const routes = require('./routes/routes'); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,10 +11,7 @@ let dbStatus = 'Disconnected';
 
 async function connectDB() {
     try {
-        await mongoose.connect(MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(MONGO_URI,);
         dbStatus = 'Connected';
         console.log('MongoDB connected successfully.');
     } catch (error) {
@@ -23,6 +21,9 @@ async function connectDB() {
 }
 
 connectDB();
+
+app.use(express.json());
+app.use('/api', routes);
 
 app.get('/', (req, res) => {
     res.send(`<h1>Database Connection Status: ${dbStatus}</h1>`);
