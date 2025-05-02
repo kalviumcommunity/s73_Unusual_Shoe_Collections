@@ -2,20 +2,34 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-// Sample Model (Replace with your own Model)
-const Item = mongoose.model('Item', new mongoose.Schema({
-    name: { type: String, required: true },
-    description: { type: String }
-}));
+// Import the Item model from your schema file
+const Item = require('../models/Item.js');
+
+// Manual input validation
+function validateItem(data) {
+    if (!data.name || typeof data.name !== 'string') {
+        return 'Name is required and must be a string';
+    }
+    if (data.description && typeof data.description !== 'string') {
+        return 'Description must be a string';
+    }
+    return null;
+}
 
 // Create a new item (POST)
 router.post('/items', async (req, res) => {
+    const validationError = validateItem(req.body);
+    if (validationError) {
+        return res.status(400).json({ message: validationError });
+    }
+
     try {
         const newItem = new Item(req.body);
         await newItem.save();
         res.status(201).json(newItem);
     } catch (error) {
-        res.status(500).json({ message: 'Error creating item', error });
+        console.error('Error creating item:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
@@ -25,7 +39,8 @@ router.get('/items', async (req, res) => {
         const items = await Item.find();
         res.status(200).json(items);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching items', error });
+        console.error('Error fetching items:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
@@ -38,12 +53,18 @@ router.get('/items/:id', async (req, res) => {
         }
         res.status(200).json(item);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching item', error });
+        console.error('Error fetching item:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
 // Update an item by ID (PUT)
 router.put('/items/:id', async (req, res) => {
+    const validationError = validateItem(req.body);
+    if (validationError) {
+        return res.status(400).json({ message: validationError });
+    }
+
     try {
         const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedItem) {
@@ -51,7 +72,8 @@ router.put('/items/:id', async (req, res) => {
         }
         res.status(200).json(updatedItem);
     } catch (error) {
-        res.status(500).json({ message: 'Error updating item', error });
+        console.error('Error updating item:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
@@ -64,7 +86,8 @@ router.delete('/items/:id', async (req, res) => {
         }
         res.status(200).json({ message: 'Item deleted successfully' });
     } catch (error) {
-        res.status(500).json({ message: 'Error deleting item', error });
+        console.error('Error deleting item:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 

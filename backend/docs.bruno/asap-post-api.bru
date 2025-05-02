@@ -1,0 +1,19 @@
+meta {
+  name: asap-post-api
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/api/items
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Irrigation Pump",
+    "description": "High-efficiency electric pump for small farms."
+  }
+  
+}
